@@ -1,0 +1,42 @@
+name: Prepare pull request for release
+
+run-name: pr-for-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'SphereView version tag to update to'
+        required: True
+        default: v0.x.y
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v4
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+    - name: Install generators
+      run : |
+        uv tool install flatpak-cargo-generator
+        uv tool install flatpak-node-generator
+    - name: Clone SphereView repo
+      run: git clone --depth 1 --branch ${{ inputs.version }} https://github.com/dynobo/sphereview.git
+    - name: Run cargo generator
+      run: flatpak-cargo-generator ./sphereview/Cargo.lock -o cargo-sources.json
+    - name: Run node generator
+      run: flatpak-node-generator npm ./sphereview/resources/photosphereviewer/package-lock.json -o node-sources.json
+    - name: Remove cloned repo
+      run: rm -rf ./sphereview
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v7
+      with:
+        commit-message: create new release
+        branch: update
+        delete-branch: true
+        title: 'Create new release'
+        assignees: dynobo
+        reviewers: dynobo
