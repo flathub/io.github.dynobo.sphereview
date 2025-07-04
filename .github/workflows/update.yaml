@@ -1,5 +1,7 @@
 name: Prepare pull request for release
 
+permissions:
+  contents: write
 run-name: pr-for-release
 
 on:
