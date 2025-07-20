@@ -49,7 +49,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/dynobo/sphereview.git
-        tag: v0.1.2
-        commit: 24f7e9e7b72efd6fc34067149b14ff50980b1388
+        tag: v0.1.3
+        commit: 8c950059a965fc5c71aca8581597519d01720c72
       - cargo-sources.json
       - node-sources.json
