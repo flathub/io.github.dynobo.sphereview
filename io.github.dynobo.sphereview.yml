@@ -26,7 +26,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.gnome.org/GNOME/blueprint-compiler
-        tag: v0.16.0
+        tag: 0.18.0
+        commit: 07c9c9df9cd1b6b4454ecba21ee58211e9144a4b
 
   - name: sphereview
     buildsystem: simple
@@ -49,7 +50,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/dynobo/sphereview.git
-        tag: v0.1.4
-        commit: b64f5854ad8ab16c31a933e714045eb867597ada
+        tag: v0.1.5
+        commit: 5a3d5b78bd2bf4be5dc5c5aae6ba28a70459c3ca
       - cargo-sources.json
       - node-sources.json

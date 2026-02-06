@@ -1,5 +1,5 @@
 #!/bin/bash
-echo -n "Make sure to update the version in sphereview.yml first!"
+echo -n "Make sure to update the version in io.github.sphereview.yml first!"
 echo -n "Please enter a version to update to (v0.1.1): "
 read version
 git clone --depth 1 --branch $version https://github.com/dynobo/sphereview.git
