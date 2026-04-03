@@ -11,23 +11,8 @@ finish-args:
   - --socket=wayland
   - --socket=fallback-x11
   - --device=dri
-cleanup:
-  - /sbin
-  - /include
-  - /share/doc
-  - /share/pkgconfig
-  - /share/man
 
 modules:
-  - name: blueprint-compiler
-    buildsystem: meson
-    cleanup:
-      - "*"
-    sources:
-      - type: git
-        url: https://gitlab.gnome.org/GNOME/blueprint-compiler
-        tag: 0.18.0
-        commit: 07c9c9df9cd1b6b4454ecba21ee58211e9144a4b
 
   - name: sphereview
     buildsystem: simple
@@ -40,13 +25,10 @@ modules:
     build-commands:
       - cargo --offline fetch --manifest-path Cargo.toml --verbose
       - cargo build --offline --release --all-features
-      - install -Dm0755 target/release/sphereview ${FLATPAK_DEST}/bin/sphereview
-      - install -Dm644 resources/assets/io.github.dynobo.sphereview.svg
-        ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/io.github.dynobo.sphereview.svg
-      - install -Dm644 io.github.dynobo.sphereview.desktop
-        ${FLATPAK_DEST}/share/applications/io.github.dynobo.sphereview.desktop
-      - install -Dm644 io.github.dynobo.sphereview.appdata.xml
-        ${FLATPAK_DEST}/share/appdata/io.github.dynobo.sphereview.appdata.xml
+      - install -Dm0755 target/release/sphereview -t ${FLATPAK_DEST}/bin/
+      - install -Dm644 resources/assets/io.github.dynobo.sphereview.svg -t ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/
+      - install -Dm644 io.github.dynobo.sphereview.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 io.github.dynobo.sphereview.appdata.xml -t ${FLATPAK_DEST}/share/metainfo/
     sources:
       - type: git
         url: https://github.com/dynobo/sphereview.git
